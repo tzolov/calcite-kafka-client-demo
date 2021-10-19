@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "defaultSchema": "KAFKA",
+  "schemas": [
+    {
+    "name": "KAFKA",
+    "tables": [
+      {
+        "name": "USER_TITLES",
+        "factory": "org.apache.calcite.adapter.kafka.KafkaTableFactory",
+        "stream": { "stream": true },
+        "operand": {
+          "bootstrap.servers": "localhost:9092",
+          "topic.name": "user-titles",
+          "row.converter": "com.example.calcitekafkaclientdemo.calcite.KafkaRowConverterImplEx",
+          "consumer.params": {
+            "group.id": "calcite-ut-consumer",
+            "key.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer",
+            "value.deserializer": "org.apache.kafka.common.serialization.ByteArrayDeserializer"
+          }
+        }
+      }
+    ]
+    }
+  ]
+}
